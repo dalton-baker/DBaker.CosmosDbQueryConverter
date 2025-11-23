@@ -4,7 +4,7 @@ using System.Collections;
 using System.Globalization;
 using System.Linq;
 
-namespace DBaker.CosmosQueryDefinitionBuilder;
+namespace DBaker.CosmosDbQueryConverter;
 
 public static partial class CosmosDbQuery
 {

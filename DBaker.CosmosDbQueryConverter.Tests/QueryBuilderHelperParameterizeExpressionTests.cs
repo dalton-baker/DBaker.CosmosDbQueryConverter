@@ -1,7 +1,8 @@
-using DBaker.CosmosQueryDefinitionBuilder.Tests.Helpers;
+using DBaker.CosmosDbQueryConverter;
+using DBaker.CosmosDbQueryConverter.Tests.Helpers;
 using System.Linq.Expressions;
 
-namespace DBaker.CosmosQueryDefinitionBuilder.Tests;
+namespace DBaker.CosmosDbQueryConverter.Tests;
 
 [TestClass]
 public class QueryBuilderHelperParameterizeExpressionTests : TestBase

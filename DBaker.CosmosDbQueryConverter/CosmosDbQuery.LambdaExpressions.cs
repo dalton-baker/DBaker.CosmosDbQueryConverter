@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Linq.Expressions;
 
-namespace DBaker.CosmosQueryDefinitionBuilder;
+namespace DBaker.CosmosDbQueryConverter;
 
 public static partial class CosmosDbQuery
 {

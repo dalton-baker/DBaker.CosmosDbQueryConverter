@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using Bogus;
 
-namespace DBaker.CosmosQueryDefinitionBuilder.Tests.Helpers;
+namespace DBaker.CosmosDbQueryConverter.Tests.Helpers;
 
 public abstract class TestBase
 {

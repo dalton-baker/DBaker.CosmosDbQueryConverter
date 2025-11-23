@@ -1,6 +1,6 @@
-﻿using DBaker.CosmosQueryDefinitionBuilder.Tests.Helpers;
+﻿using DBaker.CosmosDbQueryConverter.Tests.Helpers;
 
-namespace DBaker.CosmosQueryDefinitionBuilder.Tests;
+namespace DBaker.CosmosDbQueryConverter.Tests;
 
 [TestClass]
 public class BuildQueryTests : TestBase

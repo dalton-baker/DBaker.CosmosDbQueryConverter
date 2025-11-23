@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
-namespace DBaker.CosmosQueryDefinitionBuilder;
+namespace DBaker.CosmosDbQueryConverter;
 
 /// <summary>
 /// Internal helper class that provides core functionality for building and parameterizing Cosmos DB SQL queries.

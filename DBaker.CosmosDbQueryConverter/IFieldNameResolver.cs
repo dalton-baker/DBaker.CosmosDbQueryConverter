@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace DBaker.CosmosQueryDefinitionBuilder;
+namespace DBaker.CosmosDbQueryConverter;
 
 /// <summary>
 /// Defines a contract for resolving expression field names to their corresponding JSON property paths in Cosmos DB queries.

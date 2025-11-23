@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 
-namespace DBaker.CosmosQueryDefinitionBuilder.Tests.Helpers;
+namespace DBaker.CosmosDbQueryConverter.Tests.Helpers;
 
 public class TestSubDocument
 {

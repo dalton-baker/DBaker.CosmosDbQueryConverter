@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-namespace DBaker.CosmosQueryDefinitionBuilder;
+namespace DBaker.CosmosDbQueryConverter;
 
 /// <summary>
 /// Default implementation of <see cref="IFieldNameResolver"/> that resolves property expressions to JSON property paths.

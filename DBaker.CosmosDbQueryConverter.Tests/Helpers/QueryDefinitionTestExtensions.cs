@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Cosmos;
 
-namespace DBaker.CosmosQueryDefinitionBuilder.Tests.Helpers;
+namespace DBaker.CosmosDbQueryConverter.Tests.Helpers;
 
 public static class QueryDefinitionTestExtensions
 {
