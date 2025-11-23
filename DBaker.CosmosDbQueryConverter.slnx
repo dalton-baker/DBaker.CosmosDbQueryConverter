@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DBaker.CosmosDbQueryConverter.Tests/DBaker.CosmosDbQueryConverter.Tests.csproj" />
+  <Project Path="DBaker.CosmosDbQueryConverter/DBaker.CosmosDbQueryConverter.csproj" />
+</Solution>
