@@ -1,18 +1,52 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-	  <LangVersion>latest</LangVersion>
-	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <InternalsVisibleTo Include="DBaker.CosmosDbQueryConverter.Tests" />
-  </ItemGroup>
+	<PropertyGroup>
+		<PackageId>DBaker.CosmosDbQueryConverter</PackageId>
+		<Authors>dalton_s_baker</Authors>
+		<Version>1.0.0</Version>
+		<PackageProjectUrl>https://github.com/dalton-baker/DBaker.CosmosDbQueryConverter</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/dalton-baker/DBaker.CosmosDbQueryConverter</RepositoryUrl>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<Description>
+			Write native Cosmos DB SQL queries with automatic parameterization. No query builder abstractions - just Cosmos SQL with safe parameter handling.
+		</Description>
+		<Copyright></Copyright>
+		<PackageTags>
+			cosmosdb, cosmos-db, azure-cosmosdb, azure, query-builder, sql, parameterized-queries, type-safe, lambda-expressions, cosmos, database, nosql, document-database, csharp, dotnet, netstandard, json-mapping, sql-injection-prevention
+		</PackageTags>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryType>github</RepositoryType>
+		<Company />
+		<NoPackageAnalysis>true</NoPackageAnalysis>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.0.0" />
-  </ItemGroup>
+		<PackageReleaseNotes>https://github.com/dalton-baker/DBaker.CosmosDbQueryConverter/wiki/Version-1-Release-Notes</PackageReleaseNotes>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="" />
+		<None Include="..\LICENSE" Pack="true" PackagePath="" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="DBaker.CosmosDbQueryConverter.Tests" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Azure.Cosmos" Version="3.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="images\icon.png" Pack="true" PackagePath="" />
+	</ItemGroup>
 
 </Project>

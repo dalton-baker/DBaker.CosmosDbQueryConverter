@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="phase" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="white" stop-opacity="0"/>
+      <stop offset="40%" stop-color="white" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="white" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded tile -->
+  <rect width="128" height="128" rx="22" ry="22" fill="#000"/>
+
+  <!-- D glyph -->
+  <path
+    d="M32 24 H68 Q104 24 104 64 Q104 104 68 104 H32 Z"
+    fill="url(#phase)"
+  />
+</svg>

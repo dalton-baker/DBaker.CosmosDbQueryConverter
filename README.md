@@ -1,14 +1,14 @@
 # DBaker.CosmosDbQueryConverter
 
-A type-safe, parameterized query builder for Azure Cosmos DB with lambda expression support and automatic JSON property mapping.
+Write native Cosmos DB SQL queries with automatic parameterization. No query builder abstractions - just Cosmos SQL with safe parameter handling.
 
 ## Features
 
-- 🔒 **Type-safe queries** with compile-time validation using lambda expressions
-- 🎯 **Automatic property mapping** from C# property names to JSON field names (supports `JsonProperty` and `JsonPropertyName` attributes)
-- 🛡️ **SQL injection protection** through automatic parameterization
-- 📦 **Array expansion** for `IN` clauses
-- 🔗 **Nested property support** for complex document structures
+- **Write real SQL** - Use the full power of Cosmos DB SQL syntax, not a limited query builder API
+- **Automatic parameterization** - Parameter injection protection without manual parameter management
+- **IntelliSense support** - Lambda expressions give you autocomplete and prevent property name typos
+- **Smart array expansion** - Arrays automatically expand into `IN` clause parameters
+- **JSON property mapping** - Automatically resolves `JsonProperty` and `JsonPropertyName` attributes
 
 ## Installation
 
@@ -20,12 +20,12 @@ dotnet add package DBaker.CosmosDbQueryConverter
 
 ### Lambda Expressions (Recommended)
 
-The most powerful approach - get IntelliSense, refactoring support, and automatic JSON property name resolution:
+Write real Cosmos DB SQL with IntelliSense and automatic property mapping:
 
 ```csharp
 using DBaker.CosmosDbQueryConverter;
 
-// Simple query with type safety
+// Simple query with parameters and property names
 var query = CosmosDbQuery.Convert((MyDocument c) =>
     $"SELECT * FROM {c} WHERE {c.Status} = {myStatus}");
 
@@ -42,17 +42,17 @@ var query = CosmosDbQuery.Convert((MyDocument doc, SubDocument sub) =>
     $"""
     SELECT *
     FROM {doc}
-    JOIN sub IN {sub}
+    JOIN {sub} IN {doc.SubDoc}
     WHERE {doc.Id} = {myId}
       AND {sub.Status} = {myStatus}
     """)
 ```
 
-Properties are automatically mapped using `JsonProperty` (Newtonsoft.Json) or `JsonPropertyName` (System.Text.Json) attributes, with camelCase as the default.
+Properties are automatically mapped using `JsonProperty` (Newtonsoft.Json) or `JsonPropertyName` (System.Text.Json) attributes. If neither exist we fall back to the camel cased property name.
 
 ### Interpolated Strings
 
-Quick and convenient for simple queries:
+Write native Cosmos SQL with interpolated values - all parameters are automatically handled:
 
 ```csharp
 var query = CosmosDbQuery.Convert(
@@ -65,7 +65,7 @@ var query = CosmosDbQuery.Convert(
 
 ### Placeholder-based Queries
 
-Useful when working with dynamic queries or parameter arrays:
+For dynamic query building with parameter arrays:
 
 ```csharp
 var query = CosmosDbQuery.Convert(
@@ -76,11 +76,11 @@ var query = CosmosDbQuery.Convert(
 
 ## How It Works
 
-All values are automatically converted to named parameters (`@p0`, `@p1`, etc.) to prevent SQL injection. Arrays and other `IEnumerable` types are expanded into multiple parameters for `IN` clauses.
+You write native Cosmos DB SQL queries. The library handles all the parameterization work automatically - converting values to named parameters (`@p0`, `@p1`, etc.) and expanding arrays into multiple parameters for `IN` clauses.
 
 **Before:**
 ```csharp
-$"SELECT * FROM c WHERE c.status IN {myStatuses}"
+$"SELECT * FROM {c} WHERE {c.Status} IN {myStatuses}"
 ```
 
 **After:**
@@ -88,17 +88,40 @@ $"SELECT * FROM c WHERE c.status IN {myStatuses}"
 SELECT * FROM c WHERE c.status IN (@p0, @p1, @p2)
 ```
 
-## Custom Field Name Resolution
+### Executing Queries
 
-Customize how property names are resolved:
+The `Convert` methods return a standard `QueryDefinition` that you pass directly to the Cosmos DB SDK:
 
 ```csharp
-public class MyFieldNameResolver : IFieldNameResolver
+var query = CosmosDbQuery.Convert((MyDocument c) =>
+    $"SELECT * FROM {c} WHERE {c.Status} = {myStatus}");
+
+var queryIterator = container.GetItemQueryIterator<MyDocument>(query);
+```
+
+## Custom Field Name Resolution
+
+### Disable Camel Casing
+
+By default, property names are converted to camel case. To use property names as-is:
+
+```csharp
+var query = CosmosDbQuery.Convert(
+    (MyDocument c) => $"SELECT * FROM {c} WHERE {c.Status} = {myStatus}",
+    new DefaultFieldNameResolver(useCamelCase: false));
+```
+
+### Custom Resolver
+
+Create your own resolver by implementing `IFieldNameResolver` or inheriting from `DefaultFieldNameResolver`:
+
+```csharp
+public class MyFieldNameResolver : DefaultFieldNameResolver
 {
-    public string ResolveFieldName(MemberExpression memberExpression)
+    protected override string GetJsonPropertyName(MemberInfo member)
     {
         // Your custom logic here
-        return memberExpression.Member.Name.ToLowerInvariant();
+        return member.Name.ToLowerInvariant();
     }
 }
 
